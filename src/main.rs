@@ -1,16 +1,43 @@
+#[allow(unused_imports)]
 use std::env;
 use std::fs;
 use std::process;
 
+mod toml_parser;
+
+#[allow(dead_code)]
+struct Configs {
+    h1_class: &'static str,
+    h2_class: &'static str,
+    h3_class: &'static str,
+    paragraph_class: &'static str,
+    blockquote_class: &'static str,
+}
+
+impl Configs {
+    #[allow(dead_code)]
+    fn make_config(&self){
+        //todo
+    }
+}
+
+fn debug_toml_parser (){
+    toml_parser::parse();
+    std::process::exit(1);
+}
+
 fn get_filename(args: Vec<String>) -> String {
-    if args.len() < 2 {
+
+    if args.len() < 3 {
         println!("Expected file name");
         process::exit(1);
     }
-    fs::read_to_string(&args[1]).expect("Expected file name")
+    fs::read_to_string(&args[2]).expect("Expected file name")
 }
 
 fn main() {
+    debug_toml_parser();
+
     let file_contents = get_filename(env::args().collect());
     // println!("{}", file_contents);
 
@@ -28,18 +55,18 @@ fn main() {
         }
         let first_word = word_chunks[0];
         let _top_level_parse = match first_word {
-            "#" => println!("<h1>{}</h1>", e.replacen(first_word, "", 1).trim()),
-            "##" => println!("<h2>{}</h2>", e.replacen(first_word, "", 1).trim()),
-            "###" => println!("<h3>{}</h3>", e.replacen(first_word, "", 1).trim()),
+            "#" => println!("<h1>{}</h1>", &e[first_word.len()..].trim()),
+            "##" => println!("<h2>{}</h2>", &e[first_word.len()..].trim()),
+            "###" => println!("<h3>{}</h3>", &e[first_word.len()..].trim()),
             ">" => {
                 //check if one space is present after '>'
                 if characterized_chunks[1] == ' ' {
                     println!(
                         "<blockquote>{}</blockquote>",
-                        e.replacen(first_word, "", 1).trim()
+                        &e[first_word.len()..].trim()
                     )
                 } else {
-                    println!("{}", e.replacen(first_word, "", 1).trim())
+                    println!("{}", &e[first_word.len()..].trim())
                 }
             }
             _ => {

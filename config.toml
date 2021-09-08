@@ -1,0 +1,6 @@
+h1_class = "h1"
+h2_class = "h2"
+h3_class = "h3"
+[]
+paragraph_class = "pTag"
+blockquote_class = "qTag"
