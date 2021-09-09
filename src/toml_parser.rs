@@ -9,7 +9,10 @@ pub fn parse() {
         if i.trim().as_bytes()[0] as char == '[' || i.trim().as_bytes()[0] as char == '#'  {
             continue;
         } 
-        //todo
+        
+        //emulating of parsing attributes from a config.toml 
+
+
     }
 
 }
