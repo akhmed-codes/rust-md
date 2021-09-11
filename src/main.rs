@@ -6,7 +6,7 @@ use std::process;
 mod toml_parser;
 
 #[allow(dead_code)]
-struct Configs {
+pub struct Configs {
     h1_class: &'static str,
     h2_class: &'static str,
     h3_class: &'static str,
@@ -36,8 +36,7 @@ fn get_filename(args: Vec<String>) -> String {
 }
 
 fn main() {
-    debug_toml_parser();
-
+    // debug_toml_parser();
     let file_contents = get_filename(env::args().collect());
     // println!("{}", file_contents);
 
@@ -94,6 +93,18 @@ fn main() {
             }
         };
         // println!("{}", top_level_parse);
+
     }
+    // println!("{} sec {} ms", now.elapsed().as_secs(), now.elapsed().subsec_nanos() as u64 / 1_000_000);
 }
 
+// fn main() {
+//     let mut i = 0;
+//     loop {
+//         println!("# foo");
+//         if i == 1000000 {
+//             break;
+//         }
+//         i+=1;
+//     }
+// }
