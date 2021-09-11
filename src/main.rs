@@ -98,7 +98,7 @@ fn main() {
     // println!("{} sec {} ms", now.elapsed().as_secs(), now.elapsed().subsec_nanos() as u64 / 1_000_000);
 }
 
-// for sample file
+// for testing
 // fn main() {
 //     let mut i = 0;
 //     loop {
