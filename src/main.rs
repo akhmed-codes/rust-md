@@ -1,30 +1,8 @@
-#[allow(unused_imports)]
 use std::env;
 use std::fs;
 use std::process;
 
 mod toml_parser;
-
-#[allow(dead_code)]
-pub struct Configs {
-    h1_class: &'static str,
-    h2_class: &'static str,
-    h3_class: &'static str,
-    paragraph_class: &'static str,
-    blockquote_class: &'static str,
-}
-
-impl Configs {
-    #[allow(dead_code)]
-    fn make_config(&self){
-        //todo
-    }
-}
-
-fn debug_toml_parser (){
-    toml_parser::parse();
-    std::process::exit(1);
-}
 
 fn get_filename(args: Vec<String>) -> String {
 
@@ -36,15 +14,13 @@ fn get_filename(args: Vec<String>) -> String {
 }
 
 fn main() {
-    // debug_toml_parser();
+    toml_parser::parse();
+
     let file_contents = get_filename(env::args().collect());
-    // println!("{}", file_contents);
 
     let one_liner_chunks_vec = file_contents.lines().collect::<Vec<&str>>();
-    // println!("{:?}", one_liner_chunks_vec);
 
     for (i, e) in one_liner_chunks_vec.iter().enumerate() {
-        // let plusone = one_liner_chunks_vec[i];
         
         let word_chunks: Vec<&str> = e.split_whitespace().collect();
         let characterized_chunks: Vec<char> = e.trim().chars().collect();
@@ -92,21 +68,7 @@ fn main() {
                 formatting
             }
         };
-        // println!("{}", top_level_parse);
 
     }
-    // println!("{} sec {} ms", now.elapsed().as_secs(), now.elapsed().subsec_nanos() as u64 / 1_000_000);
 }
 
-// for testing
-// fn main() {
-//     let mut i = 0;
-//     loop {
-//         println!("# foo");
-//         if i == 1000000 {
-//             break;
-//         }
-//         i+=1;
-//     }
-// }
-//
